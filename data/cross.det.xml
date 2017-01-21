@@ -1,0 +1,13 @@
+<additional>
+    <inductionLoop id="0" lane="1i_0" pos="390" freq="30" file="cross.out"/>
+    <inductionLoop id="1" lane="1i_0" pos="490" freq="30" file="cross.out"/>
+    
+    <inductionLoop id="2" lane="3i_0" pos="390" freq="30" file="cross.out"/>
+    <inductionLoop id="3" lane="3i_0" pos="490" freq="30" file="cross.out"/>
+    
+    <inductionLoop id="4" lane="2i_0" pos="390" freq="30" file="cross.out"/>
+    <inductionLoop id="5" lane="2i_0" pos="490" freq="30" file="cross.out"/>
+    
+    <inductionLoop id="6" lane="4i_0" pos="390" freq="30" file="cross.out"/>
+    <inductionLoop id="7" lane="4i_0" pos="490" freq="30" file="cross.out"/>  
+</additional> 
