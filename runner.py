@@ -43,13 +43,12 @@ import traci
 
 
 def generate_routefile():
-    random.seed(42)  # make tests reproducible
-    N = 10000  # number of time steps
+    N = 6000  # number of time steps
     # demand per second from different directions
-    pWE = 1. / 10
-    pEW = 1. / 20
-    pNS = 1. / 12
-    pSN = 1. / 24
+    pWE = random.random()
+    pEW = random.random()
+    pNS = random.random()
+    pSN = random.random()
     with open("data/cross.rou.xml", "w") as routes:
         print("""<routes>
         <vType id="typeWE" accel="0.8" decel="4.5" sigma="0.5" length="5" minGap="2.5" maxSpeed="16.67" guiShape="passenger"/>
@@ -84,11 +83,13 @@ def generate_routefile():
                 lastVeh = i
         print("</routes>", file=routes)
 
-def startSim():
-    sumoBinary = checkBinary('sumo-gui')
+def startSim(binary):
+    sumoBinary = checkBinary(binary)
     # first, generate the route file for this simulation
     generate_routefile()
     # this is the normal way of using traci. sumo is started as a
     # subprocess and then the python script connects and runs
     traci.start([sumoBinary, "-c", "data/cross.sumocfg",
                  "--tripinfo-output", "tripinfo.xml"])
+def stopSim():
+    traci.close()

@@ -62,38 +62,37 @@ def countVeh():
 
 
 def switchPhase(phase):
-    if traci.trafficlights.getPhase("0") in [1,3]:
-        return
-    
+   
     if phase == 0:
-        if traci.trafficlights.getPhase("0") == 2:
+        '''if traci.trafficlights.getPhase("0") == 2:
             traci.trafficlights.setPhase("0",3)
-        else:
-            traci.trafficlights.setPhase("0",0)
-            EW.StopTime += 1
-            WE.StopTime += 1
-            SN.StopTime = 0
-            NS.StopTime = 0
+        else:'''
+        traci.trafficlights.setPhase("0",0)
+        EW.StopTime += 1
+        WE.StopTime += 1
+        SN.StopTime = 0
+        NS.StopTime = 0
     
     else:
-        if traci.trafficlights.getPhase("0") == 0:
+        '''if traci.trafficlights.getPhase("0") == 0:
             traci.trafficlights.setPhase("0",1)
-        else:
-            traci.trafficlights.setPhase("0",2)
-            EW.StopTime = 0
-            WE.StopTime = 0
-            SN.StopTime += 1
-            NS.StopTime += 1
+        else:'''
+        traci.trafficlights.setPhase("0",2)
+        EW.StopTime = 0
+        WE.StopTime = 0
+        SN.StopTime += 1
+        NS.StopTime += 1
         
 
 def getCurrentScore():
     myScore = 0
     for s in Streams:
-        myScore += s.StagVeh * s.StopTime
+        myScore += s.StagVeh * (2**s.StopTime)
     return -1*myScore/1000
 
 def actOnState(action):
-    switchPhase(action)
+    if action != -1:
+        switchPhase(action)
     traci.simulationStep()
     countVeh()
     NSVeh = (Streams[1].StagVeh + Streams[3].StagVeh)/VSFactor
